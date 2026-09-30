@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "games": [
+    {
+      "id": "deep-signal",
+      "repo": "spiderwisp/deep-signal",
+      "title": "Deep Signal",
+      "description": "Descend into the Pelagic Trench. Restore a silent research station, recover its last transmission, and escape the collapse.",
+      "license": "MIT",
+      "version": "0.2.0",
+      "release": "v0.2.0",
+      "tags": [
+        "Exploration",
+        "Underwater",
+        "Adventure"
+      ],
+      "gamepad": true,
+      "cover": "catalog/artwork/deep-signal.jpg",
+      "platforms": {
+        "linux-x86_64": {
+          "asset": "DeepSignal-Linux.zip",
+          "sha256": "5cc8495adf9d745c1402f184786093646df02c7728820069a099eaab83d69181",
+          "size": 94652515,
+          "executable": "DeepSignal-Linux/DeepSignal.x86_64",
+          "args": [
+            "--fullscreen"
+          ],
+          "session_protocol": "fgc-v1"
+        },
+        "windows-x86_64": {
+          "asset": "DeepSignal-Windows.zip",
+          "sha256": "b0da1efeaedd020017ad9b29855214a27173712fdc95a2cf34818bc354bcb461",
+          "size": 104282713,
+          "executable": "DeepSignal-Windows/Deep Signal.exe",
+          "args": [
+            "--fullscreen"
+          ],
+          "session_protocol": "fgc-v1"
+        }
+      }
+    }
+  ]
+}

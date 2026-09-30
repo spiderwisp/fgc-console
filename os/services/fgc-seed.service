@@ -1,0 +1,14 @@
+[Unit]
+Description=Prepare the offline FGC game library
+After=local-fs.target
+Before=lightdm.service
+
+[Service]
+Type=oneshot
+User=fgc
+Group=fgc
+ExecStart=/usr/bin/python3 /usr/lib/fgc/seed.py
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

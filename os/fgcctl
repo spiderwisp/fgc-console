@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import json, os, socket, stat, sys
+from pathlib import Path
+
+try:
+    path=Path(sys.argv[1])
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+    info=os.fstat(fd)
+    if not stat.S_ISREG(info.st_mode) or info.st_uid!=os.getuid() or info.st_size>16384:
+        raise ValueError('Invalid request file')
+    with os.fdopen(fd,'rb') as f: request=f.read()
+    path.unlink()
+    with socket.socket(socket.AF_UNIX,socket.SOCK_STREAM) as s:
+        s.settimeout(45);s.connect('/run/fgc/system.sock');s.sendall(request+b'\n')
+        answer=b''
+        while b'\n' not in answer and len(answer)<1048576:
+            chunk=s.recv(65536)
+            if not chunk:break
+            answer+=chunk
+    value=json.loads(answer)
+    print(json.dumps(value))
+except Exception as e:
+    print(json.dumps({'ok':False,'error':'Console service is unavailable: '+str(e)}))
+    sys.exit(1)
